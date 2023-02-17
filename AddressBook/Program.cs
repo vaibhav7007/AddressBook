@@ -26,6 +26,11 @@ namespace AddressBook
                     addressBook.EditContract("Vaibhav");
                     addressBook.Display();
                     break;
+                case 4:
+                    addressBook.CreateContact();
+                    addressBook.DeleteContact("Vaibhav");
+                    addressBook.Display();
+                    break;
                 default:
                     Console.WriteLine("Please enter right option");
                     break;

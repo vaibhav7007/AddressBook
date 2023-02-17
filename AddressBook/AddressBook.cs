@@ -42,12 +42,13 @@ namespace AddressBook
             {
                 if (contact.FirstName.Equals(name))
                 {
-                    Console.WriteLine("1:First name\n2:Last name\n3:Address\n4:City\n5:State\n6:Phone number\n7:Zip code\n8:Email Id");
+                    Console.WriteLine("Enter option to edit contact");
+                    Console.WriteLine("1:Address");
                     int option = Convert.ToInt32(Console.ReadLine());
                     switch (option)
                     {
                         case 1:
-                            Console.WriteLine("Enter new first name");
+                            Console.WriteLine("Enter new First name");
                             contact.FirstName = Console.ReadLine();
                             break;
                         case 2:
@@ -71,7 +72,7 @@ namespace AddressBook
                             contact.PhoneNumber = Console.ReadLine();
                             break;
                         case 7:
-                            Console.WriteLine("Enter new Zip code");
+                            Console.WriteLine("Enter zip code");
                             contact.Zip = Convert.ToInt32(Console.ReadLine());
                             break;
                         case 8:
@@ -83,7 +84,24 @@ namespace AddressBook
                             break;
                     }
                 }
+                else
+                {
+                    Console.WriteLine("The contact is not found");
+                }
             }
+        }
+        public void DeleteContact(string name)
+        {
+            Contact deleteContact = new Contact();
+            foreach (var contact in contactList.ToList())
+            {
+                if (contact.FirstName.Equals(name))
+                {
+                    deleteContact = contact;
+                }
+                contactList.Remove(deleteContact);
+            }
+            Console.WriteLine("The contact is deleted successfully");
         }
     }
 }
