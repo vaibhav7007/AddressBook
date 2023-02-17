@@ -23,7 +23,7 @@ namespace AddressBook
                     break;
                 case 3:
                     addressBook.CreateContact();
-                    addressBook.EditContract("Shivani");
+                    addressBook.EditContract("Vaibhav");
                     addressBook.Display();
                     break;
                 default:
