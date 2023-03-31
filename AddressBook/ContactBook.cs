@@ -9,12 +9,18 @@ namespace AddressBook
     public class ContactBook
     {
         public Dictionary<string, Contact> contactDict;
+        public Dictionary<int, Contact> contactDict1;
+        public Dictionary<string, Contact> contactDict2;
         public List<Contact> contactList;
 
         public ContactBook()
         {
             this.contactDict = new Dictionary<string, Contact>();
+            this.contactDict1 = new Dictionary<int, Contact>();
+            this.contactDict2 = new Dictionary<string, Contact>();
             this.contactList = new List<Contact>(contactDict.Values);
+            this.contactList = new List<Contact>(contactDict1.Values);
+            this.contactList = new List<Contact>(contactDict2.Values);
         }
 
         public void addContact(string firstName, string lastName, string address, string city, string state, int zip, string phoneNumber, string email)
@@ -22,7 +28,8 @@ namespace AddressBook
             Contact newContact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
             //this.contactDict.Add(firstName, newContact);
             this.contactDict.Add(city, newContact);
-            //this.contactDict.Add(state, newContact);
+            this.contactDict2.Add(state, newContact);
+            this.contactDict1.Add(zip, newContact);
         }
         public void ShowList()
         {
@@ -122,33 +129,22 @@ namespace AddressBook
                 Console.WriteLine(ele);
             }
         }
-        public void SortName()
+        public void SortContactByState()
         {
-            SortByName sortByName = new SortByName();
-
-            contactList.Sort(sortByName);
-        }
-
-        public override string ToString()
-        {
-            try
+            var array = contactDict2.Keys.ToArray();
+            Array.Sort(array);
+            foreach (var ele in array)
             {
-                foreach (var contact in contactList)
-                {
-                    return "First Name " + contact.FirstName + "\nLast Name " + contact.LastName;
-                }
+                Console.WriteLine(ele);
             }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-            return default;
         }
-        private class SortByName : IComparer<Contact>//UC11
+        public void SortContactByZip()
         {
-            public int Compare(Contact x, Contact y)
+            var array = contactDict1.Keys.ToArray();
+            Array.Sort(array);
+            foreach (var ele in array)
             {
-                return string.Compare(x.FirstName, y.FirstName);
+                Console.WriteLine(ele);
             }
         }
     }
