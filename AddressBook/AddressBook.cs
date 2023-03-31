@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Loader;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,6 @@ namespace AddressBook
         List<Contact> contactList = new List<Contact>();
         public void CreateContact()
         {
-            Contact contact = new Contact();
             Console.WriteLine("Please add contact details");
             Console.WriteLine("Enter First Name");
             contact.FirstName = Console.ReadLine();
@@ -34,11 +34,11 @@ namespace AddressBook
         }
         public void Display()
         {
-            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("-------------------------------------------");
             Console.WriteLine("Contact Details" + "\n" + "FirstName: " + contact.FirstName + "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n" + "State: " + contact.State + "\n" + "PhoneNumber: " + contact.PhoneNumber + "\n" + "Zip: " + contact.Zip + "\n" + "Email: " + contact.Email);
-
+            Console.WriteLine("-------------------------------------------");
         }
-        public void EditContract(string name)
+        public void EditContact(string name)
         {
             foreach (var contact in contactList)
             {
@@ -104,6 +104,66 @@ namespace AddressBook
                 contactList.Remove(deleteContact);
             }
             Console.WriteLine("The contact is deleted successfully");
+        }
+        public void NoDuplicateEntry(string name)
+        {
+            Contact contact = new Contact();
+            if (contactList.Count > 0)
+            {
+                List<Contact> contacts = contactList.Where(c => c.FirstName == name).ToList();
+                if (contacts.Count > 0)
+                {
+                    Console.WriteLine("Duplicate Entry");
+                    Console.WriteLine("-------------------------------------------");
+                }
+                else
+                {
+                    contactList.Add(contact);
+                }
+            }
+            else
+            {
+                contactList.Add(contact);
+            }
+        }
+        public void SearchPersonBasedOnCityOrState(string city, string state)
+        {
+            if (contactList.Count > 0)
+            {
+                List<Contact> contacts1 = contactList.Where(c => (c.City == city || c.State == state)).ToList();
+                if (contacts1.Count > 0)
+                {
+                    Console.WriteLine("The person of that city or state is present");
+                    contactList.Add(contact);
+                }
+                else
+                {
+                    Console.WriteLine("The person of that city or state is not present");
+                }
+            }
+        }
+        public void SearchNumPersonContactBasedOnCityOrState()
+        {
+            Console.WriteLine("Enter city name");
+            string city = Console.ReadLine();
+            Console.WriteLine("Enter state name");
+            string state = Console.ReadLine();
+            int count = 0;
+            if (contactList.Count > 0)
+            {
+                List<Contact> contacts1 = contactList.Where(c => (c.City == city || c.State == state || (c.City == city && c.State == state))).ToList();
+                if (contacts1.Count > 0)
+                {
+                    Console.WriteLine("The person of that city or state is present");
+                    contactList.Add(contact);
+                }
+                else
+                {
+                    Console.WriteLine("The person of that city or state is not present");
+                }
+            }
+            count++;
+            Console.WriteLine("The count of persons contact is: " + count);
         }
     }
 }
