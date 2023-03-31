@@ -138,9 +138,32 @@ namespace AddressBook
                 }
                 else
                 {
-                    Console.WriteLine("the person of that city or state is not present");
+                    Console.WriteLine("The person of that city or state is not present");
                 }
             }
+        }
+        public void SearchNumPersonContactBasedOnCityOrState()
+        {
+            Console.WriteLine("Enter city name");
+            string city = Console.ReadLine();
+            Console.WriteLine("Enter state name");
+            string state = Console.ReadLine();
+            int count = 0;
+            if (contactList.Count > 0)
+            {
+                List<Contact> contacts1 = contactList.Where(c => (c.City == city || c.State == state || (c.City == city && c.State == state))).ToList();
+                if (contacts1.Count > 0)
+                {
+                    Console.WriteLine("The person of that city or state is present");
+                    contactList.Add(contact);
+                }
+                else
+                {
+                    Console.WriteLine("The person of that city or state is not present");
+                }
+            }
+            count++;
+            Console.WriteLine("The count of persons contact is: " + count);
         }
     }
 }
