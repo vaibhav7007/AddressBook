@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace AddressBook
 {
-    internal class AddressBook
+    public class AddressBook
     {
         Contact contact = new Contact();
         List<Contact> contactList = new List<Contact>();
         public void CreateContact()
         {
+            Contact contact = new Contact();
             Console.WriteLine("Please add contact details");
             Console.WriteLine("Enter First Name");
             contact.FirstName = Console.ReadLine();
@@ -35,6 +36,7 @@ namespace AddressBook
         {
             Console.WriteLine("-------------------------------------");
             Console.WriteLine("Contact Details" + "\n" + "FirstName: " + contact.FirstName + "\n" + "LastName: " + contact.LastName + "\n" + "Address: " + contact.Address + "\n" + "City: " + contact.City + "\n" + "State: " + contact.State + "\n" + "PhoneNumber: " + contact.PhoneNumber + "\n" + "Zip: " + contact.Zip + "\n" + "Email: " + contact.Email);
+
         }
         public void EditContract(string name)
         {
@@ -43,7 +45,7 @@ namespace AddressBook
                 if (contact.FirstName.Equals(name))
                 {
                     Console.WriteLine("Enter option to edit contact");
-                    Console.WriteLine("1:Address");
+                    Console.WriteLine("1:First name\n2:Last name\n3:Address\n4:City\n5:State\n6:Phone number\n7:Zip code\n8:Email Id");
                     int option = Convert.ToInt32(Console.ReadLine());
                     switch (option)
                     {
